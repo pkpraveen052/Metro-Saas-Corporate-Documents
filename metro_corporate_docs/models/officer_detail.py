@@ -17,6 +17,7 @@ class OfficerDetail(models.Model):
                                domain="[('country_id', '=?', country_id)]")
     country_id = fields.Many2one('res.country', string='Country', ondelete='restrict')
     identification_number = fields.Char("Identification Number")
+    email = fields.Char("Email")
     nationality = fields.Char("Nationality/Citizenship")
     position = fields.Selection([
         ('director', 'DIRECTOR'),
@@ -49,7 +50,6 @@ class OfficerDetail(models.Model):
                 address.append(rec.country_id.name)
 
             rec.officer_address = ', '.join(address)
-
 
 
 
