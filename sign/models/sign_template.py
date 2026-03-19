@@ -324,6 +324,14 @@ class SignItemParty(models.Model):
     _description = "Signature Item Party"
 
     name = fields.Char(required=True, translate=True)
+    company_id = fields.Many2one(
+        'res.company',
+        string='Company',
+        default=lambda self: self.env.company,
+        required=True,
+        index=True,
+    )
+    email = fields.Char(string='Email')
 
     sms_authentification = fields.Boolean('SMS Authentication', default=False,)
 
@@ -337,8 +345,14 @@ class SignItemParty(models.Model):
 
     @api.model
     def add(self, name):
-        party = self.search([('name', '=', name)])
-        return party.id if party else self.create({'name': name}).id
+        party = self.search([
+            ('name', '=', name),
+            ('company_id', '=', self.env.company.id),
+        ], limit=1)
+        return party.id if party else self.create({
+            'name': name,
+            'company_id': self.env.company.id,
+        }).id
 
     def buy_credits(self):
         service_name = 'sms'
