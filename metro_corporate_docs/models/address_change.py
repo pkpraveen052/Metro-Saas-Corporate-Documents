@@ -294,9 +294,16 @@ class CorporateAddressChange(models.Model):
             body="Signed PDF generated.",
             attachment_ids=[attachment.id]
         )
+        director_role_names = self.officer_ids.filtered(
+            lambda officer: officer.position == 'director' and officer.name
+        ).mapped('name')
+        for role_name in director_role_names:
+            self.env['sign.item.role'].sudo().add(role_name)
+
         template = self.env['sign.template'].create({
             'name': 'Address_Change_%s' % self.company_id.name,
             'attachment_id': attachment.id,
+            'corporate_address_change_id': self.id,
         })
         if template:
             self.sign_template_id = template.id

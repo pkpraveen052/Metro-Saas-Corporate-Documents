@@ -80,6 +80,7 @@
                         <field name="officer_ids">
                             <tree>
                                 <field name="officer_id"/>
+                                <field name="email"/>
                                 <field name="identification_number"/>
                                 <field name="position"/>
                             </tree>

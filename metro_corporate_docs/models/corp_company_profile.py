@@ -146,6 +146,7 @@ class CorpCompanyOfficer(models.Model):
     corp_company_profile_id = fields.Many2one('corp.company.profile', string="Company Profile")
 
     name = fields.Char("Name")
+    email = fields.Char("Email")
     identification_number = fields.Char("Identification Number")
     nationality = fields.Char("Nationality/Citizenship")
     position = fields.Selection([
@@ -165,6 +166,7 @@ class CorpCompanyOfficer(models.Model):
     def _onchange_officer_id(self):
         if self.officer_id:
             self.name = self.officer_id.name
+            self.email = self.officer_id.email
             self.identification_number = self.officer_id.identification_number
             self.nationality = self.officer_id.nationality
             self.position = self.officer_id.position
@@ -224,4 +226,3 @@ class CorpCompanyShareholder(models.Model):
             })
 
         return super().write(vals)
-

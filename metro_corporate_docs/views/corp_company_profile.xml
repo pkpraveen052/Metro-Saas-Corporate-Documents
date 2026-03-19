@@ -158,6 +158,7 @@
 
                         <tree editable="bottom">
                             <field name="officer_id" domain="[('position','!=','shareholder')]"/>
+                            <field name="email"/>
                             <field name="identification_number"/>
                             <field name="nationality"/>
                             <field name="position"/>
