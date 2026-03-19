@@ -294,13 +294,23 @@ class CorporateAddressChange(models.Model):
             body="Signed PDF generated.",
             attachment_ids=[attachment.id]
         )
-        director_role_names = self.officer_ids.filtered(
-            lambda officer: officer.position == 'director' and officer.officer_id
-        ).mapped('officer_id').mapped('name')
-        print("\n\n\n\n\n\n\director_role_names ===",director_role_names)
-        for role_name in director_role_names:
-            print("Creating....")
-            self.env['sign.item.role'].sudo().create({'name': role_name})
+        director_officers = self.officer_ids.filtered(
+            lambda officer: officer.position == 'director' and officer.officer_id and officer.email
+        )
+        for director in director_officers:
+            role_name = director.officer_id.name
+            role_domain = [
+                ('name', '=', role_name),
+                ('company_id', '=', self.company_id.id),
+                ('email', '=', director.email),
+            ]
+            existing_role = self.env['sign.item.role'].sudo().search(role_domain, limit=1)
+            if not existing_role:
+                self.env['sign.item.role'].sudo().create({
+                    'name': role_name,
+                    'company_id': self.company_id.id,
+                    'email': director.email,
+                })
 
         template = self.env['sign.template'].create({
             'name': 'Address_Change_%s' % self.company_id.name,

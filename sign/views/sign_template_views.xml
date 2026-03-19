@@ -292,6 +292,8 @@
         <field name="arch" type="xml">
             <tree editable="bottom">
                 <field name="name" string="Role Name"/>
+                <field name="company_id"/>
+                <field name="email"/>
                 <field name="sms_authentification"/>
             </tree>
         </field>
@@ -308,6 +310,8 @@
                         <h1><field name="name"/></h1>
                     </div>
                     <group>
+                        <field name="company_id"/>
+                        <field name="email"/>
                         <field name="sms_authentification"/>
                         <button type="object" name="buy_credits" string="Buy SMS credit" class="btn-primary"></button>
                     </group>

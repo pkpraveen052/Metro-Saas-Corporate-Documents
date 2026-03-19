@@ -161,6 +161,13 @@
             <field name="perm_unlink" eval="False"/>
         </record>
 
+        <record id="ir_rule_sign_item_role_company_restriction" model="ir.rule">
+            <field name="name">sign.item.role: Restrict roles by company</field>
+            <field name="model_id" ref="sign.model_sign_item_role"/>
+            <field name="domain_force">[('company_id', '=', user.company_id.id)]</field>
+            <field name="groups" eval="[(4, ref('sign.group_sign_employee')), (4, ref('sign.group_sign_user')), (4, ref('sign.group_sign_manager'))]"/>
+        </record>
+
         <!-- Portal Access Rules -->
         <record id="ir_rule_sign_request_portal" model="ir.rule">
             <field name="name">Portal Personal Sign Request</field>
