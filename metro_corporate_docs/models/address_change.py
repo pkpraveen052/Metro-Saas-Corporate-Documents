@@ -295,10 +295,12 @@ class CorporateAddressChange(models.Model):
             attachment_ids=[attachment.id]
         )
         director_role_names = self.officer_ids.filtered(
-            lambda officer: officer.position == 'director' and officer.name
-        ).mapped('name')
+            lambda officer: officer.position == 'director' and officer.officer_id
+        ).mapped('officer_id').mapped('name')
+        print("\n\n\n\n\n\n\director_role_names ===",director_role_names)
         for role_name in director_role_names:
-            self.env['sign.item.role'].sudo().add(role_name)
+            print("Creating....")
+            self.env['sign.item.role'].sudo().create({'name': role_name})
 
         template = self.env['sign.template'].create({
             'name': 'Address_Change_%s' % self.company_id.name,

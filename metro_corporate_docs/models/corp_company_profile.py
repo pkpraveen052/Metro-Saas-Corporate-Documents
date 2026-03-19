@@ -145,7 +145,6 @@ class CorpCompanyOfficer(models.Model):
     company_id = fields.Many2one('res.company', string='Company', default=lambda self: self.env.company)
     corp_company_profile_id = fields.Many2one('corp.company.profile', string="Company Profile")
 
-    name = fields.Char("Name")
     email = fields.Char("Email")
     identification_number = fields.Char("Identification Number")
     nationality = fields.Char("Nationality/Citizenship")

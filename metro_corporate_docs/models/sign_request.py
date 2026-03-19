@@ -38,7 +38,7 @@ class SignSendRequest(models.TransientModel):
         if not role_name:
             return False
 
-        director_by_name = directors.filtered(lambda d: d.name and d.name.lower() == role_name.lower())[:1]
+        director_by_name = directors.filtered(lambda d: d.officer_id.name and d.officer_id.name.lower() == role_name.lower())[:1]
         if director_by_name:
             return director_by_name
 
@@ -57,7 +57,7 @@ class SignSendRequest(models.TransientModel):
         if partner:
             return partner
         return self.env['res.partner'].create({
-            'name': director.name,
+            'name': director.officer_id.name,
             'email': director.email,
         })
 
