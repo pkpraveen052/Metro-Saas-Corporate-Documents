@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="corporate_document_attachment_tree" model="ir.ui.view">
+            <field name="name">corporate.document.attachment.tree</field>
+            <field name="model">corporate.document.attachment</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="report_id"/>
+                    <field name="company_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="corporate_document_attachment_form" model="ir.ui.view">
+            <field name="name">corporate.document.attachment.form</field>
+            <field name="model">corporate.document.attachment</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" placeholder="eg: Simplified"/>
+                            </group>
+                            <group>
+                                <field name="company_id"/>                               
+                            </group>
+                            <group>
+                                <field name="report_docx_template"/>
+                            </group>
+                            <group>
+                                <field name="write_date"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Technical" groups="base.group_no_one">
+                                <group>
+                                    <group>
+                                        <field name="report_id"/>
+                                    </group>
+                                    <group>
+                                        <button name="update_custom_fields" string="Update Custom Fields" type="object"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="corporate_document_attachment_action">
+            <field name="name">Corporate Document</field>
+            <field name="res_model">corporate.document.attachment</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        
+        <menuitem id="menu_director_statement_template"
+              parent="metro_corporate_docs.menu_main_corp_company_configuration"
+              action="corporate_document_attachment_action"
+              sequence="0"
+              groups="base.group_system"
+        />
+
+    </data>
+</odoo>

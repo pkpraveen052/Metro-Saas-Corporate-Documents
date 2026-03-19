@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<!--    <data noupdate="1">-->
+<!--        <record id="fs_template1" model="director.statement.template">-->
+<!--            <field name="name">Simplified</field>-->
+<!--            <field name="report_id" ref="metroerp_fs.ir_actions_report_metro_style2"/>-->
+<!--        </record>-->
+<!--    </data>-->
+
+    <data>
+        <record id="ir_actions_report_corporate_address_change" model="ir.actions.report">
+            <field name="name">Corporate Address Change - docx</field>
+            <field name="model">corporate.address.change</field>
+            <field name="report_type">docx-docx</field>
+            <field name="binding_model_id" ref="model_corporate_address_change"/>
+            <field name="binding_type">report</field>   
+            <field name="type">ir.actions.report</field>
+            <field name="print_report_name">'Address Change_%s' % (object.company_id.name)</field>
+            <field name="custom_report_field_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'name': 'Current_Date',
+                'technical_name': 'Current_Date',
+                'default_value': 'value = record.get_current_date()'
+            }),
+
+            (0,0, {
+                'name': 'Prepared_By',
+                'technical_name': 'Prepared_By',
+                'default_value': 'value = record.prepared_by'
+            }),
+
+            (0,0, {
+                'name': 'Company_Name',
+                'technical_name': 'Company_Name',
+                'default_value': 'value = record.company_id.name'
+            }),
+
+            (0,0, {
+                'name': 'Company_UEN',
+                'technical_name': 'Company_UEN',
+                'default_value': 'value = record.company_uen'
+            }),
+
+            (0,0, {
+                'name': 'Company_Address',
+                'technical_name': 'Company_Address',
+                'default_value': 'value = record.old_address'
+            }),
+
+            (0,0,{
+            'name':'Directors',
+            'technical_name':'Directors',
+            'default_value':'value = record.get_directors_block()'
+            }),
+        ]"/>
+        </record>
+
+        <record id="ir_actions_report_corporate_address_change_pdf" model="ir.actions.report">
+            <field name="name">Corporate Address Change - pdf</field>
+            <field name="model">corporate.address.change</field>
+            <field name="report_type">docx-pdf</field>
+            <field name="binding_model_id" ref="model_corporate_address_change"/>
+            <field name="binding_type">report</field>
+            <field name="type">ir.actions.report</field>
+            <field name="print_report_name">'Address Change_%s' % (object.company_id.name)</field>
+            <field name="custom_report_field_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'name': 'Current_Date',
+                'technical_name': 'Current_Date',
+                'default_value': 'value = record.get_current_date()'
+            }),
+
+            (0,0, {
+                'name': 'Prepared_By',
+                'technical_name': 'Prepared_By',
+                'default_value': 'value = record.prepared_by'
+            }),
+
+            (0,0, {
+                'name': 'Company_Name',
+                'technical_name': 'Company_Name',
+                'default_value': 'value = record.company_id.name'
+            }),
+
+            (0,0, {
+                'name': 'Company_UEN',
+                'technical_name': 'Company_UEN',
+                'default_value': 'value = record.company_uen'
+            }),
+
+            (0,0, {
+                'name': 'Company_Address',
+                'technical_name': 'Company_Address',
+                'default_value': 'value = record.old_address'
+            }),
+
+           (0,0,{
+            'name':'Directors',
+            'technical_name':'Directors',
+            'default_value':'value = record.get_directors_block()'
+            }),
+        ]"/>
+        </record>
+
+
+    </data>
+</odoo>

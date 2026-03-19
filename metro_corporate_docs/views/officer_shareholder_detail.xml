@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_corp_officer_shareholder_history_tree" model="ir.ui.view">
+            <field name="name">corp.officer.shareholder.history.tree</field>
+            <field name="model">corp.officer.shareholder.history</field>
+            <field name="arch" type="xml">
+                <tree string="Officer / Shareholder History">
+                    <field name="shareholder_id"/>
+                    <field name="officer_id"/>
+                    <field name="name"/>
+                    <field name="identification_number"/>
+                    <field name="nationality"/>
+                    <field name="position"/>
+                    <field name="shareholder_address"/>
+                    <field name="officer_address"/>
+                    <field name="total_number_share"/>
+                    <field name="officer_address_change"/>
+                    <field name="change_date"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_corp_officer_shareholder_history" model="ir.actions.act_window">
+            <field name="name">History</field>
+            <field name="res_model">corp.officer.shareholder.history</field>
+            <field name="view_mode">tree</field>
+        </record>
+    </data>
+</odoo>

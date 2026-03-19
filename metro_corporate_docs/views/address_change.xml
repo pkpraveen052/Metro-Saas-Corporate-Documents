@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="corporate_address_change_tree" model="ir.ui.view">
+            <field name="name">corporate.address.change.tree</field>
+            <field name="model">corporate.address.change</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="company_name" string="Name"/>
+                    <field name="company_uen" string="UEN"/>
+                    <field name="company_id"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="corporate_address_change_form" model="ir.ui.view">
+            <field name="name">corporate.address.change.form</field>
+            <field name="model">corporate.address.change</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_print_docx" type="object" string="Download DOCX" class="btn-primary" attrs="{'invisible': [('id','=',False)]}"/>
+                        <button name="action_print_pdf" type="object" string="Download PDF" class="btn-primary" attrs="{'invisible': [('id','=',False)]}"/>
+
+                        <button name="action_draft" type="object" string="Reset To Draft" state="draft" attrs="{'invisible': [('is_send_sign','=',True)]}"/>
+                        <button name="action_review" type="object" string="Review" class="btn-primary" state="draft" attrs="{'invisible': [('state', 'not in', ['draft', 'review'])]}"/>
+<!--                        <button name="action_pre_sign_check" type="object" string="Pre Sign Check" class="btn-primary" attrs="{'invisible': [('id','=',False)]}"/>-->
+                        <button name="action_signing" type="object" string="Sign Pre-Check" class="btn-primary" attrs="{'invisible': ['|', ('state', '!=', 'pre_sign_check'), ('is_send_sign', '=', True)]}"/>
+<!--                        <button name="action_sign_finished" type="object" string="Sign Finished" class="btn-primary" attrs="{'invisible': [('id','=',False)]}"/>-->
+<!--                        <button name="action_acra" type="object" string="ACRA(Manually)" class="btn-primary" attrs="{'invisible': [('id','=',False)]}"/>-->
+<!--                        <button name="action_done" type="object" string="Done" class="btn-primary" attrs="{'invisible': [('id','=',False)]}"/>-->
+
+                        <field name="state" widget="statusbar" statusbar_visible="draft,review,pre_sign_check,signing,sign_finished,acra,done"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button type="object" name="open_requests" class="oe_stat_button" icon="fa-pencil-square-o" >
+                                <div class="o_field_widget o_stat_info">
+<!--                                    <span class="o_stat_value">-->
+<!--                                        <field name="signed_count"/>-->
+<!--                                    </span>-->
+                                    <span class="o_stat_text">Signed Document</span>
+                                </div>
+                            </button>
+                        </div>
+                        <group>
+                            <group>
+<!--                                <field name="type_of_doc" readonly='1'/>-->
+                                <field name="company_id" attrs="{'readonly': [('state', 'in', ['signing', 'sign_finished', 'acra', 'done'])]}"/>
+                                <field name="passed_on_date" required="1"/>
+                            </group>
+                            <group>
+                                <field name="corp_company_profile_id" invisible="1" force_save="1"/>
+                                <field name="company_name" readonly="1" force_save="1"/>
+                                <field name="company_uen" string="UEN" readonly="1" force_save="1"/>
+<!--                                <field name="effective_date" required="1"/>-->
+                                <field name="id" invisible="1"/>
+                                <field name="sign_template_id" invisible="1"/>
+                                <field name="is_send_sign" invisible="1"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="new_address" force_save="1"/>
+                                <field name="corp_doc_attach_ids" widget="many2many_tags"/>
+<!--                                <field name="appointed_person" required="1" placeholder="Enter the Name"/> -->
+                            </group>
+                            <group>
+                                <field name="old_address" readonly="1" force_save="1"/>
+<!--                                <field name="prepared_by" required="1"/>-->
+<!--                                <field name="role" required="1"/>-->
+                            </group>
+                        </group>
+
+                            <!-- OFFICERS -->
+                        <div class="bg-light p-2 mt-3 mb-2">
+                            <strong>Director For Signature</strong>
+                        </div>
+                        <field name="officer_ids">
+                            <tree>
+                                <field name="officer_id"/>
+                                <field name="identification_number"/>
+                                <field name="position"/>
+                            </tree>
+                        </field>
+
+		    </sheet>
+<!--                    <div class="oe_chatter">-->
+<!--                        <field name="message_follower_ids" groups="base.group_user"/>-->
+<!--                        <field name="activity_ids"/>-->
+<!--                        <field name="message_ids"/>-->
+<!--                    </div>-->
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="corporate_address_change_action">
+            <field name="name">Corporate Address Change</field>
+            <field name="res_model">corporate.address.change</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        
+        <menuitem id="menu_corporate_address_change"
+              parent="metro_corporate_docs.menu_main_corp_company_profile"
+              action="corporate_address_change_action"
+              sequence="3"/>
+
+    </data>
+</odoo>

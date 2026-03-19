@@ -1,0 +1,205 @@
+<odoo>
+
+    <!-- FORM VIEW -->
+
+    <record id="view_corp_company_form" model="ir.ui.view">
+        <field name="name">corp.company.profile.form</field>
+        <field name="model">corp.company.profile</field>
+        <field name="arch" type="xml">
+
+            <form string="Company Profile">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_officer_shareholder_history" string="Track History" type="object" class="oe_stat_button" icon="fa-list" style="width:200px;">
+<!--                            <field string="Sent Responses" name="sent_order_responses_count" class="o_stat_value" widget="statinfo"/>-->
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" placeholder="Company Name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <field name="company_id"/>
+                        <field name="former_name"/>
+                        <field name="registered_address"
+                                       placeholder="Registered Office Address"/>
+                    </group>
+                    <group col="2">
+                        <group>
+<!--                            <field name="former_name"/>-->
+                            <field name="name_change_date"/>
+                            <field name="uen"/>
+                            <field name="incorporation_date"/>
+                            <field name="company_type"/>
+                            <field name="status"/>
+                        </group>
+                        <group>
+<!--                            <field name="registered_address"-->
+<!--                                       placeholder="Registered Office Address"/>-->
+                        <field name="address_date"/>
+                        <field name="last_agm_date"/>
+                        <field name="last_ar_date"/>
+                        <field name="fye_date"/>
+                        </group>
+
+                    </group>
+                    <!-- BUSINESS ACTIVITIES -->
+
+                    <div class="bg-light p-2 mt-3 mb-2">
+                        <strong>BUSINESS ACTIVITIES</strong>
+                    </div>
+                    <group col="2">
+                        <field name="primary_activity"
+                               placeholder="Primary Business Activity"/>
+                        <field name="secondary_activity"
+                               placeholder="Secondary Business Activity"/>
+                    </group>
+
+                    <!-- ISSUED SHARE CAPITAL -->
+
+                    <div class="bg-light p-2 mt-3 mb-2">
+                        <strong>Issued Share Capital</strong>
+                    </div>
+
+                    <field name="issued_capital_ids">
+
+                        <tree editable="bottom">
+                            <field name="par_value"/>
+                            <field name="total_number_share"/>
+                            <field name="currency"/>
+                            <field name="share_type"/>
+                            <field name="corp_company_profile_id" invisible="1"/>
+                        </tree>
+
+                    </field>
+
+
+                    <!-- PAID UP CAPITAL -->
+
+                    <div class="bg-light p-2 mt-3 mb-2">
+                        <strong>Paid-Up Capital</strong>
+                    </div>
+
+                    <field name="paidup_capital_ids">
+
+                        <tree editable="bottom">
+                            <field name="total_paidup"/>
+                            <field name="total_number_share"/>
+                            <field name="share_type"/>
+                            <field name="currency"/>
+                            <field name="corp_company_profile_id" invisible="1"/>
+                        </tree>
+
+                    </field>
+
+
+                    <!-- TREASURY SHARES -->
+
+                    <div class="bg-light p-2 mt-3 mb-2">
+                        <strong>Company has the following Ordinary Shares held as Treasury Shares</strong>
+                    </div>
+
+                    <field name="treasury_share_ids">
+
+                        <tree editable="bottom">
+                            <field name="number_of_shares"/>
+                            <field name="currency"/>
+                            <field name="corp_company_profile_id" invisible="1"/>
+                        </tree>
+
+                    </field>
+
+
+                    <!-- AUDIT FIRMS -->
+
+                    <div class="bg-light p-2 mt-3 mb-2">
+                        <strong>Audit Firm(S)</strong>
+                    </div>
+
+                    <field name="audit_firm_ids">
+
+                        <tree editable="bottom">
+                            <field name="name"/>
+                            <field name="corp_company_profile_id" invisible="1"/>
+                        </tree>
+
+                    </field>
+
+
+                    <!-- CHARGES -->
+
+                    <div class="bg-light p-2 mt-3 mb-2">
+                        <strong>Charge(S)</strong>
+                    </div>
+
+                    <field name="charge_ids">
+
+                        <tree editable="bottom">
+                            <field name="charge_number"/>
+                            <field name="charge_date"/>
+                            <field name="currency"/>
+                            <field name="amount_secured"/>
+                            <field name="chargee"/>
+                            <field name="corp_company_profile_id" invisible="1"/>
+                        </tree>
+
+                    </field>
+
+
+                    <!-- OFFICERS -->
+
+                    <div class="bg-light p-2 mt-3 mb-2">
+                        <strong>Officer(S)</strong>
+                    </div>
+
+                    <field name="officer_ids">
+
+                        <tree editable="bottom">
+                            <field name="officer_id" domain="[('position','!=','shareholder')]"/>
+                            <field name="identification_number"/>
+                            <field name="nationality"/>
+                            <field name="position"/>
+                            <field name="appointment_date"/>
+                            <field name="corp_company_profile_id" invisible="1"/>
+                            <field name="officer_address"/>
+                        </tree>
+                    </field>
+
+                    <!-- SHAREHOLDER -->
+
+                    <div class="bg-light p-2 mt-3 mb-2">
+                        <strong>Shareholder(S)</strong>
+                    </div>
+
+                    <field name="shareholder_ids">
+
+                        <tree editable="bottom">
+                            <field name="shareholder_id" domain="[('position','=','shareholder')]"/>
+                            <field name="identification_number"/>
+                            <field name="nationality"/>
+                            <field name="total_number_share"/>
+                            <field name="currency"/>
+                            <field name="shareholder_address"/>
+                            <field name="corp_company_profile_id" invisible="1"/>
+                            <field name="officer_address_change"/>
+                        </tree>
+                    </field>
+                </sheet>
+
+            </form>
+
+        </field>
+    </record>
+
+
+    <!-- ACTION -->
+
+    <record id="action_corp_company_profile" model="ir.actions.act_window">
+        <field name="name">Company Profile</field>
+        <field name="res_model">corp.company.profile</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

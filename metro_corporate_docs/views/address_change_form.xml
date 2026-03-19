@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--    account move    -->
+        <record id="address_change_form_form" model="ir.ui.view">
+            <field name="name">address.change.form.form</field>
+            <field name="model">address.change.form</field>
+            <field name="arch" type="xml">
+                <form string="Address Change Form">
+                    <header>
+    <!--                    <button name="action_send" type="object" string=" Send" icon="fa-paper-plane" states="ready_to_send"/>-->
+                        <field name="state" widget="statusbar" statusbar_visible="ready_to_send"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="old_address"/>
+                                <field name="company_id"/>
+                            </group>
+                            <group>
+                                <field name="new_address"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="address_change_form_tree" model="ir.ui.view">
+        <field name="name">address.change.form.tree</field>
+        <field name="model">address.change.form</field>
+        <field name="arch" type="xml">
+            <tree string="Address Change Form">
+                <field name="old_address"/>
+                <field name="new_address"/>
+                <field name="company_id"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_address_change_form" model="ir.actions.act_window">
+        <field name="name">Address Form</field>
+        <field name="res_model">address.change.form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create Address Change Form
+            </p>
+        </field>
+
+    </record>
+    </data>
+</odoo>

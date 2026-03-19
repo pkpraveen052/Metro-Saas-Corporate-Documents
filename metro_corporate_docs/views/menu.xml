@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+<!--        root menu-->
+        <menuitem id="menu_corporate_documents_root"
+                  name="Corporate Documents"
+                  sequence="3"
+        />
+<!--        address change form menu-->
+<!--        <menuitem id="menu_address_change_form"-->
+<!--              parent="metro_corporate_docs.menu_corporate_documents_root"-->
+<!--              action="metro_corporate_docs.action_address_change_form"-->
+<!--              sequence="1"-->
+<!--        />-->
+
+        <menuitem id="menu_main_corp_company_profile"
+              name="Profile"
+              parent="metro_corporate_docs.menu_corporate_documents_root"
+                sequence="2"
+        />
+        <menuitem id="menu_corp_company_profile"
+              name="Company Profile"
+              parent="metro_corporate_docs.menu_main_corp_company_profile"
+              action="metro_corporate_docs.action_corp_company_profile"
+                sequence="1"
+        />
+
+        <menuitem id="menu_corp_officer_profile"
+              name="Officer AND Shareholder"
+              parent="metro_corporate_docs.menu_main_corp_company_profile"
+              action="metro_corporate_docs.action_officer_detail"
+                sequence="2"
+        />
+
+    <menuitem id="menu_main_corp_company_configuration"
+              name="Configuration"
+              parent="metro_corporate_docs.menu_corporate_documents_root"
+                sequence="3"
+        />
+
+    </data>
+</odoo>
