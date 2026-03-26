@@ -47,6 +47,7 @@
 }
 
 .metro-dashboard__card {
+  position: relative;
   color: #fff;
   border-radius: 16px;
   padding: 18px;
@@ -56,6 +57,27 @@
   align-items: flex-start;
   justify-content: space-between;
   box-shadow: 0 8px 24px rgba(30, 41, 59, 0.15);
+}
+
+.metro-dashboard__settings-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.24);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.metro-dashboard__settings-btn:hover,
+.metro-dashboard__settings-btn:focus {
+  background: rgba(255, 255, 255, 0.35);
+  color: #fff;
 }
 
 .metro-dashboard__card--address {
@@ -99,6 +121,13 @@
   font-weight: 600;
   border-radius: 10px;
   border: 0;
+}
+
+.metro-dashboard__actions {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
 }
 
 @media (max-width: 992px) {
