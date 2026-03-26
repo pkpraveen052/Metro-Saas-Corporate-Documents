@@ -29,6 +29,8 @@ class OfficerDetail(models.Model):
     company_id = fields.Many2one('res.company', string='Company', default=lambda self: self.env.company)
     officer_address = fields.Char("Address", compute="_compute_officer_address")
     total_number_share = fields.Char("Number of Shares/Currency")
+    nric_no = fields.Char(string="NRIC No.")
+
 
 
     @api.depends('street', 'street2', 'city', 'state_id', 'zip', 'country_id')
@@ -50,6 +52,7 @@ class OfficerDetail(models.Model):
                 address.append(rec.country_id.name)
 
             rec.officer_address = ', '.join(address)
+
 
 
 

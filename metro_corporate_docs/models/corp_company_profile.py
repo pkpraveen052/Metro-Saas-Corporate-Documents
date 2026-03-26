@@ -164,7 +164,7 @@ class CorpCompanyOfficer(models.Model):
     @api.onchange('officer_id')
     def _onchange_officer_id(self):
         if self.officer_id:
-            self.name = self.officer_id.name
+            # self.name = self.officer_id.name
             self.email = self.officer_id.email
             self.identification_number = self.officer_id.identification_number
             self.nationality = self.officer_id.nationality
@@ -176,7 +176,7 @@ class CorpCompanyOfficer(models.Model):
             self.env['corp.officer.shareholder.history'].create({
                 'corp_company_profile_id': rec.corp_company_profile_id.id,
                 'officer_id': rec.officer_id.id,
-                'name': rec.name,
+                # 'name': rec.name,
                 'identification_number': rec.identification_number,
                 'nationality': rec.nationality,
                 'position': rec.position,
@@ -215,7 +215,7 @@ class CorpCompanyShareholder(models.Model):
             self.env['corp.officer.shareholder.history'].create({
                 'corp_company_profile_id': rec.corp_company_profile_id.id,
                 'shareholder_id': rec.shareholder_id.id,
-                'name': rec.name,
+                # 'name': rec.name,
                 'identification_number': rec.identification_number,
                 'nationality': rec.nationality,
                 'total_number_share': rec.total_number_share,
@@ -225,3 +225,4 @@ class CorpCompanyShareholder(models.Model):
             })
 
         return super().write(vals)
+

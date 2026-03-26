@@ -1,0 +1,53 @@
+.metro-dashboard {
+  background: #fff;
+  border: 1px solid #dfe3e8;
+  border-radius: 12px;
+  padding: 25px;
+  margin: 15px;
+}
+.metro-dashboard__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.metro-dashboard__header h1 {
+  margin: 0;
+  font-weight: 700;
+}
+.metro-dashboard__cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+.metro-dashboard__card {
+  border: 1px solid #dfe3e8;
+  border-radius: 12px;
+  padding: 16px;
+  background: #fbfcff;
+  box-shadow: 0 2px 8px rgba(30, 41, 59, 0.06);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.metro-dashboard__card h3 {
+  margin: 0 0 6px;
+  font-size: 13px;
+  color: #5e6a7e;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.metro-dashboard__card .count {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #233a60;
+}
+.metro-dashboard__card button {
+  margin-top: 15px;
+}
+.metro-dashboard__links {
+  margin-top: 26px;
+}
+.metro-dashboard__links .o_dashboard_link {
+  margin-right: 4px;
+}

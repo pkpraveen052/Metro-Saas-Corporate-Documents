@@ -119,6 +119,7 @@ class CorporateAddressChange(models.Model):
 
     def get_current_date(self):
         formatted_date = datetime.now().strftime("%d/%m/%Y")
+        print('\n\n\n\nformatted_date', formatted_date)
         return formatted_date
 
     def get_company_address(self):
@@ -185,11 +186,6 @@ class CorporateAddressChange(models.Model):
     def action_draft(self):
         self.write({'state': 'draft'})
 
-    import base64
-    import tempfile
-    import subprocess
-    import os
-
     def action_review(self):
         self.ensure_one()
 
@@ -198,7 +194,7 @@ class CorporateAddressChange(models.Model):
         )
 
         # Generate DOCX
-        docx_content, _ = report._render(self.ids)
+        docx_content, _ = report._render(self.ids, data={'ids': self.ids})
 
         # Convert to PDF
         with tempfile.NamedTemporaryFile(suffix=".docx", delete=False) as f:
@@ -220,7 +216,7 @@ class CorporateAddressChange(models.Model):
 
         # Create attachment
         attachment = self.env['ir.attachment'].create({
-            'name': 'Address_Change_1%s.pdf' % self.company_id.name,
+            'name': 'Address_Change%s.pdf' % self.company_id.name,
             'type': 'binary',
             'datas': base64.b64encode(pdf_content),
             'res_model': self._name,
@@ -339,4 +335,17 @@ class CorporateAddressChange(models.Model):
             "view_mode": "tree,form",
             "domain": [("template_id", "=", self.sign_template_id.id)],
             "context": {'search_default_signed': True},
+        }
+
+    def action_create_dynamic_fields(self):
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Custom Dynamic Fields',
+            'res_model': 'dynamic.fields',
+            'view_mode': 'form',
+            'target': 'new',  # ✅ Popup
+            'context': {
+                'default_model_id': self.env['ir.model']._get_id('corporate.address.change'),
+                'default_model_name': self._name,
+            }
         }

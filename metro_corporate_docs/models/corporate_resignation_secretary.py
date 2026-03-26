@@ -14,15 +14,15 @@ import os
 import base64
 
 
-class CorporateAppointmentSecretary(models.Model):
-    _name = 'corporate.appointment.secretary'
+class CorporateResignationSecretary(models.Model):
+    _name = 'corporate.resignation.secretary'
     _rec_name = 'company_uen'
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
     company_id = fields.Many2one('res.company', string='Select Company', required=True, tracking=True, domain=lambda self: [('id', 'in', self.env.user.company_ids.ids)])
     date = fields.Date("Date", default=date.today(), tracking=True, required=True)
     company_uen = fields.Char(string='Company UEN', tracking=True, required=True)
-    corp_company_profile_id = fields.Many2one('corp.company.profile', string='Company Profile')
+    address = fields.Text(string='Address')
     state = fields.Selection([
         ('draft', 'Draft'),
         ('review', 'Review'),
@@ -35,29 +35,36 @@ class CorporateAppointmentSecretary(models.Model):
 
     sign_template_id = fields.Many2one('sign.template', string='Sign Template')
     # corp_doc_attach_ids = fields.Many2many('corporate.document.attachment', string='Sign Template')
-    officer_ids = fields.Many2many(
-        'corp.company.officer',
-        string="Officers"
-    )
     secretary_id = fields.Many2one('officer.detail', string='Secretary')
-    nric_no = fields.Char(string="NRIC No.")
 
 
     @api.onchange('company_id')
     def _onchange_company_id(self):
-        if self.company_id:
-            self.company_uen = self.company_id.l10n_sg_unique_entity_number or ''
-            company_profile = self.env['corp.company.profile'].search([('company_id', '=', self.company_id.id)],
-                                                                      limit=1)
-            if company_profile:
-                self.corp_company_profile_id = company_profile.id
-                if company_profile:
-                    self.officer_ids = [(6, 0, company_profile.officer_ids.ids)]
+        for rec in self:
+            address = []
+            if rec.company_id:
+                company = rec.company_id
+                rec.company_uen = rec.company_id.l10n_sg_unique_entity_number or ''
+                if company.street:
+                    address.append(company.street)
+                if company.street2:
+                    address.append(company.street2)
+                if company.city:
+                    address.append(company.city)
+                if company.state_id:
+                    address.append(company.state_id.name)
+                if company.zip:
+                    address.append(company.zip)
+                if company.country_id:
+                    address.append(company.country_id.name)
+
+                rec.address = ', '.join(address)
+
 
     @api.model
     def create(self, vals):
         vals['state'] = 'review'
-        return super(CorporateAppointmentSecretary, self).create(vals)
+        return super(CorporateResignationSecretary, self).create(vals)
 
     def action_print_docx(self):
         log = _("<b>Document downloaded successfully!</b>")
@@ -178,7 +185,7 @@ class CorporateAppointmentSecretary(models.Model):
         self.ensure_one()
 
         report = self.env.ref(
-            'metro_corporate_docs.ir_actions_report_corporate_appointment_secretary'
+            'metro_corporate_docs.ir_actions_report_corporate_address_change'
         )
 
         # Generate DOCX
@@ -237,7 +244,7 @@ class CorporateAppointmentSecretary(models.Model):
     def action_signing(self):
         self.ensure_one()
         report = self.env.ref(
-            'metro_corporate_docs.ir_actions_report_corporate_appointment_secretary'
+            'metro_corporate_docs.ir_actions_report_corporate_address_change'
         )
 
         # STEP 1: generate DOCX
@@ -314,7 +321,17 @@ class CorporateAppointmentSecretary(models.Model):
             'view_mode': 'form',
             'target': 'new',  # ✅ Popup
             'context': {
-                'default_model_id': self.env['ir.model']._get_id('corporate.appointment.secretary'),
+                'default_model_id': self.env['ir.model']._get_id('corporate.resignation.secretary'),
                 'default_model_name': self._name,
             }
         }
+
+    def get_company_full_address(self):
+        self.ensure_one()
+        company = self.company_id
+        return "%s\n%s\n%s %s" % (
+            company.street or '',
+            company.street2 or '',
+            company.country_id.name or '',
+            company.zip or ''
+        )

@@ -5,7 +5,7 @@ from odoo import api, fields, models, _
 class CorporateDocumentAttachment(models.Model):
     _name = 'corporate.document.attachment'
 
-    name = fields.Char('Name of the Style', required=True)
+    name = fields.Char('Name', required=True)
     report_id = fields.Many2one('ir.actions.report',
                                 domain=[('report_type', '=', 'docx-docx'), ('model', '=', 'corporate.document.attachment')],
                                 string='Select Report', help='Technical')

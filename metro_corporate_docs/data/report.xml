@@ -104,5 +104,168 @@
         </record>
 
 
+
+
+
+
+        <record id="ir_actions_report_corporate_appointment_secretary" model="ir.actions.report">
+            <field name="name">Corporate Appointment Secretary - docx</field>
+            <field name="model">corporate.appointment.secretary</field>
+            <field name="report_type">docx-docx</field>
+            <field name="binding_model_id" ref="model_corporate_appointment_secretary"/>
+            <field name="binding_type">report</field>
+            <field name="type">ir.actions.report</field>
+            <field name="print_report_name">'Appointment Secretary_%s' % (object.company_id.name)</field>
+            <field name="custom_report_field_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'name': 'Current_Date',
+                'technical_name': 'Current_Date',
+                'default_value': 'value = record.get_current_date()'
+            }),
+
+
+
+            (0,0, {
+                'name': 'Company_Name',
+                'technical_name': 'Company_Name',
+                'default_value': 'value = record.company_id.name'
+            }),
+
+            (0,0, {
+                'name': 'Company_UEN',
+                'technical_name': 'Company_UEN',
+                'default_value': 'value = record.company_uen'
+            }),
+
+            (0,0, {
+                'name': 'Secretary_Name',
+                'technical_name': 'Secretary_Name',
+                'default_value': 'value = record.secretary_id.name'
+            }),
+            (0,0, {
+                'name': 'Nric_No',
+                'technical_name': 'Nric_No',
+                'default_value': 'value = record.secretary_id.nric_no'
+            }),
+
+            (0,0,{
+            'name':'Directors',
+            'technical_name':'Directors',
+            'default_value':'value = record.get_directors_block()'
+            }),
+        ]"/>
+        </record>
+
+        <record id="ir_actions_report_corporate_appointment_secretary_pdf" model="ir.actions.report">
+            <field name="name">Corporate Appointment Secretary - pdf</field>
+            <field name="model">corporate.appointment.secretary</field>
+            <field name="report_type">docx-pdf</field>
+            <field name="binding_model_id" ref="model_corporate_appointment_secretary"/>
+            <field name="binding_type">report</field>
+            <field name="type">ir.actions.report</field>
+            <field name="print_report_name">'Appointment Secretary_%s' % (object.company_id.name)</field>
+            <field name="custom_report_field_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'name': 'Current_Date',
+                'technical_name': 'Current_Date',
+                'default_value': 'value = record.get_current_date()'
+            }),
+
+
+            (0,0, {
+                'name': 'Company_Name',
+                'technical_name': 'Company_Name',
+                'default_value': 'value = record.company_id.name'
+            }),
+
+            (0,0, {
+                'name': 'Company_UEN',
+                'technical_name': 'Company_UEN',
+                'default_value': 'value = record.company_uen'
+            }),
+            (0,0, {
+                'name': 'Secretary_Name',
+                'technical_name': 'Secretary_Name',
+                'default_value': 'value = record.secretary_id.name'
+            }),
+            (0,0, {
+                'name': 'Nric_No',
+                'technical_name': 'Nric_No',
+                'default_value': 'value = record.secretary_id.nric_no'
+            }),
+
+           (0,0,{
+            'name':'Directors',
+            'technical_name':'Directors',
+            'default_value':'value = record.get_directors_block()'
+            }),
+        ]"/>
+        </record>
+
+
+        <record id="ir_actions_report_corporate_resignation_secretary" model="ir.actions.report">
+            <field name="name">Corporate Appointment Secretary - docx</field>
+            <field name="model">corporate.appointment.secretary</field>
+            <field name="report_type">docx-docx</field>
+            <field name="binding_model_id" ref="model_corporate_resignation_secretary"/>
+            <field name="binding_type">report</field>
+            <field name="type">ir.actions.report</field>
+            <field name="print_report_name">'Appointment Secretary_%s' % (object.company_id.name)</field>
+            <field name="custom_report_field_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'name': 'Current_Date',
+                'technical_name': 'Current_Date',
+                'default_value': 'value = record.get_current_date()'
+            }),
+            (0,0, {
+                'name': 'Company_Name',
+                'technical_name': 'Company_Name',
+                'default_value': 'value = record.company_id.name'
+            }),
+            (0,0, {
+                'name': 'Secretary_Name',
+                'technical_name': 'Secretary_Name',
+                'default_value': 'value = record.secretary_id.name'
+            }),
+            (0,0, {
+                'name': 'Company_Address',
+                'technical_name': 'Company_Address',
+                'default_value': 'value = record.get_company_full_address()'
+            }),
+        ]"/>
+        </record>
+
+        <record id="ir_actions_report_corporate_resignation_secretary_pdf" model="ir.actions.report">
+            <field name="name">Corporate Appointment Secretary - pdf</field>
+            <field name="model">corporate.appointment.secretary</field>
+            <field name="report_type">docx-pdf</field>
+            <field name="binding_model_id" ref="model_corporate_resignation_secretary"/>
+            <field name="binding_type">report</field>
+            <field name="type">ir.actions.report</field>
+            <field name="print_report_name">'Appointment Secretary_%s' % (object.company_id.name)</field>
+            <field name="custom_report_field_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'name': 'Current_Date',
+                'technical_name': 'Current_Date',
+                'default_value': 'value = record.get_current_date()'
+            }),
+            (0,0, {
+                'name': 'Company_Name',
+                'technical_name': 'Company_Name',
+                'default_value': 'value = record.company_id.name'
+            }),
+            (0,0, {
+                'name': 'Secretary_Name',
+                'technical_name': 'Secretary_Name',
+                'default_value': 'value = record.secretary_id.name'
+            }),
+            (0,0, {
+                'name': 'Company_Address',
+                'technical_name': 'Company_Address',
+                'default_value': 'value = record.get_company_full_address()'
+            }),
+        ]"/>
+        </record>
+
     </data>
 </odoo>

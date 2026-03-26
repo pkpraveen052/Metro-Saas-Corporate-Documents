@@ -59,8 +59,9 @@
         <menuitem id="menu_director_statement_template"
               parent="metro_corporate_docs.menu_main_corp_company_configuration"
               action="corporate_document_attachment_action"
-              sequence="0"
+              sequence="2"
               groups="base.group_system"
+                  name="Corporate Document"
         />
 
     </data>

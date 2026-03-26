@@ -14,22 +14,27 @@
 <!--        />-->
 
         <menuitem id="menu_main_corp_company_profile"
-              name="Profile"
+              name="Forms"
+              parent="metro_corporate_docs.menu_corporate_documents_root"
+                sequence="2"
+        />
+        <menuitem id="menu_main_corp_company_biz_profile"
+              name="BIZ"
               parent="metro_corporate_docs.menu_corporate_documents_root"
                 sequence="2"
         />
         <menuitem id="menu_corp_company_profile"
-              name="Company Profile"
-              parent="metro_corporate_docs.menu_main_corp_company_profile"
+              name="BIZ Profile"
+              parent="metro_corporate_docs.menu_main_corp_company_biz_profile"
               action="metro_corporate_docs.action_corp_company_profile"
                 sequence="1"
         />
 
         <menuitem id="menu_corp_officer_profile"
               name="Officer AND Shareholder"
-              parent="metro_corporate_docs.menu_main_corp_company_profile"
+              parent="metro_corporate_docs.menu_main_corp_company_biz_profile"
               action="metro_corporate_docs.action_officer_detail"
-                sequence="2"
+                sequence="1"
         />
 
     <menuitem id="menu_main_corp_company_configuration"
