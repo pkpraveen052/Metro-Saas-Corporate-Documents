@@ -4,7 +4,6 @@ odoo.define('metro_corporate_docs.dashboard', function (require) {
     var AbstractAction = require('web.AbstractAction');
     var core = require('web.core');
     var rpc = require('web.rpc');
-    var session = require('web.session');
 
     var qweb = core.qweb;
 
@@ -12,11 +11,10 @@ odoo.define('metro_corporate_docs.dashboard', function (require) {
         template: 'MetroCorporateDocsDashboard',
 
         events: {
-            'click .o_dashboard_card_open': '_onOpenCard',
-            'click .o_dashboard_link': '_onOpenLink'
+            'click .o_dashboard_open_action': '_onOpenAction'
         },
 
-        init: function (parent, context) {
+        init: function () {
             this._super.apply(this, arguments);
             this.dashboard_data = {};
         },
@@ -43,15 +41,10 @@ odoo.define('metro_corporate_docs.dashboard', function (require) {
             }));
         },
 
-        _onOpenCard: function (event) {
+        _onOpenAction: function (event) {
             var target = $(event.currentTarget).data('action');
             this.do_action(target);
         },
-
-        _onOpenLink: function (event) {
-            var target = $(event.currentTarget).data('action');
-            this.do_action(target);
-        }
     });
 
     core.action_registry.add('metro_corporate_docs.dashboard', MetroCorporateDocsDashboard);
