@@ -20,7 +20,10 @@ odoo.define('metro_corporate_docs.dashboard', function (require) {
         },
 
         start: function () {
-            return this._loadData().then(this._super.bind(this));
+            var self = this;
+            return this._super.apply(this, arguments).then(function () {
+                return self._loadData();
+            });
         },
 
         _loadData: function () {
@@ -30,12 +33,15 @@ odoo.define('metro_corporate_docs.dashboard', function (require) {
                 method: 'get_dashboard_data',
                 args: []
             }).then(function (result) {
-                self.dashboard_data = result;
-                self.renderElement();
+                self.dashboard_data = result || {};
+                self._renderDashboard();
             });
         },
 
-        renderElement: function () {
+        _renderDashboard: function () {
+            if (!this.$el) {
+                return;
+            }
             this.$el.html(qweb.render('MetroCorporateDocsDashboard', {
                 dashboard_data: this.dashboard_data,
             }));
