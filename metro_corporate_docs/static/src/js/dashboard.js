@@ -4,6 +4,7 @@ odoo.define('metro_corporate_docs.dashboard', function (require) {
     var AbstractAction = require('web.AbstractAction');
     var core = require('web.core');
     var rpc = require('web.rpc');
+    var session = require('web.session');
 
     var qweb = core.qweb;
 
@@ -11,7 +12,9 @@ odoo.define('metro_corporate_docs.dashboard', function (require) {
         template: 'MetroCorporateDocsDashboard',
 
         events: {
-            'click .o_dashboard_open_action': '_onOpenAction'
+            'click .o_dashboard_open_action': '_onOpenAction',
+            'click .o_dashboard_create_action': '_onCreateAction',
+            'click .o_dashboard_open_settings': '_onOpenSettings'
         },
 
         init: function () {
@@ -50,6 +53,49 @@ odoo.define('metro_corporate_docs.dashboard', function (require) {
         _onOpenAction: function (event) {
             var target = $(event.currentTarget).data('action');
             this.do_action(target);
+        },
+
+        _onCreateAction: function (event) {
+            var model = $(event.currentTarget).data('model');
+            if (!model) {
+                return;
+            }
+
+            var context = this._getDefaultContext();
+
+            this.do_action({
+                type: 'ir.actions.act_window',
+                res_model: model,
+                name: 'Create',
+                views: [[false, 'form']],
+                target: 'current',
+                context: context,
+            });
+        },
+
+        _onOpenSettings: function (event) {
+            var model = $(event.currentTarget).data('model');
+            if (!model) {
+                return;
+            }
+
+            var context = this._getDefaultContext();
+
+            this.do_action({
+                type: 'ir.actions.act_window',
+                res_model: model,
+                name: 'Settings',
+                views: [[false, 'form']],
+                target: 'current',
+                context: context,
+            });
+        },
+
+        _getDefaultContext: function () {
+            var companyId = session.user_context
+                && session.user_context.allowed_company_ids
+                && session.user_context.allowed_company_ids[0];
+            return companyId ? {default_company_id: companyId} : {};
         },
     });
 
