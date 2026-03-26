@@ -6,41 +6,44 @@
                   name="Corporate Documents"
                   sequence="3"
         />
-<!--        address change form menu-->
-<!--        <menuitem id="menu_address_change_form"-->
-<!--              parent="metro_corporate_docs.menu_corporate_documents_root"-->
-<!--              action="metro_corporate_docs.action_address_change_form"-->
-<!--              sequence="1"-->
-<!--        />-->
+
+        <menuitem id="menu_corporate_documents_dashboard"
+              name="Dashboard"
+              parent="metro_corporate_docs.menu_corporate_documents_root"
+              action="metro_corporate_docs.action_metro_corporate_docs_dashboard"
+              sequence="1"
+        />
 
         <menuitem id="menu_main_corp_company_profile"
               name="Forms"
               parent="metro_corporate_docs.menu_corporate_documents_root"
-                sequence="2"
+              sequence="2"
         />
+
         <menuitem id="menu_main_corp_company_biz_profile"
               name="BIZ"
               parent="metro_corporate_docs.menu_corporate_documents_root"
-                sequence="2"
+              sequence="2"
         />
+
         <menuitem id="menu_corp_company_profile"
               name="BIZ Profile"
               parent="metro_corporate_docs.menu_main_corp_company_biz_profile"
               action="metro_corporate_docs.action_corp_company_profile"
-                sequence="1"
+              sequence="1"
         />
 
         <menuitem id="menu_corp_officer_profile"
               name="Officer AND Shareholder"
               parent="metro_corporate_docs.menu_main_corp_company_biz_profile"
               action="metro_corporate_docs.action_officer_detail"
-                sequence="1"
+              sequence="1"
         />
 
-    <menuitem id="menu_main_corp_company_configuration"
+        <menuitem id="menu_main_corp_company_configuration"
               name="Configuration"
               parent="metro_corporate_docs.menu_corporate_documents_root"
-                sequence="3"
+              sequence="3"
         />
 
     </data>
