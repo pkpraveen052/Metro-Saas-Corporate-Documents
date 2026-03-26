@@ -42,18 +42,8 @@ odoo.define('metro_corporate_docs.dashboard', function (require) {
         },
 
         _onOpenAction: function (event) {
-            var $button = $(event.currentTarget);
-            var model = $button.data('model');
-            var name = $button.data('name') || 'Records';
-
-            this.do_action({
-                type: 'ir.actions.act_window',
-                name: name,
-                res_model: model,
-                view_mode: 'tree,form',
-                views: [[false, 'list'], [false, 'form']],
-                target: 'current'
-            });
+            var target = $(event.currentTarget).data('action');
+            this.do_action(target);
         },
     });
 
