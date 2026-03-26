@@ -15,30 +15,54 @@
 
             <div class="metro-dashboard__cards">
                 <div class="metro-dashboard__card metro-dashboard__card--address">
+                    <button type="button" class="metro-dashboard__settings-btn o_dashboard_open_settings" data-model="address.document.attachment" title="Open Address Change Settings" aria-label="Open Address Change Settings">
+                        <i class="fa fa-cog"/>
+                    </button>
                     <div class="metro-dashboard__icon"><i class="fa fa-map-marker"/></div>
                     <h3>Address Change</h3>
                     <div class="count"><t t-esc="dashboard_data.address_change_count or 0"/></div>
-                    <button type="button" class="btn btn-light o_dashboard_open_action" data-action="metro_corporate_docs.corporate_address_change_action">
-                        View Records
-                    </button>
+                    <div class="metro-dashboard__actions">
+                        <button type="button" class="btn btn-light o_dashboard_open_action" data-action="metro_corporate_docs.corporate_address_change_action">
+                            View Records
+                        </button>
+                        <button type="button" class="btn btn-light o_dashboard_create_action" data-model="corporate.address.change">
+                            Create
+                        </button>
+                    </div>
                 </div>
 
                 <div class="metro-dashboard__card metro-dashboard__card--appointment">
+                    <button type="button" class="metro-dashboard__settings-btn o_dashboard_open_settings" data-model="appointment.document.attachment" title="Open Appointment Secretary Settings" aria-label="Open Appointment Secretary Settings">
+                        <i class="fa fa-cog"/>
+                    </button>
                     <div class="metro-dashboard__icon"><i class="fa fa-user-plus"/></div>
                     <h3>Appointment Secretary</h3>
                     <div class="count"><t t-esc="dashboard_data.appointment_secretary_count or 0"/></div>
-                    <button type="button" class="btn btn-light o_dashboard_open_action" data-action="metro_corporate_docs.corporate_appointment_secretary_action">
-                        View Records
-                    </button>
+                    <div class="metro-dashboard__actions">
+                        <button type="button" class="btn btn-light o_dashboard_open_action" data-action="metro_corporate_docs.corporate_appointment_secretary_action">
+                            View Records
+                        </button>
+                        <button type="button" class="btn btn-light o_dashboard_create_action" data-model="corporate.appointment.secretary">
+                            Create
+                        </button>
+                    </div>
                 </div>
 
                 <div class="metro-dashboard__card metro-dashboard__card--resignation">
+                    <button type="button" class="metro-dashboard__settings-btn o_dashboard_open_settings" data-model="resignation.document.attachment" title="Open Resignation Secretary Settings" aria-label="Open Resignation Secretary Settings">
+                        <i class="fa fa-cog"/>
+                    </button>
                     <div class="metro-dashboard__icon"><i class="fa fa-user-times"/></div>
                     <h3>Resignation Secretary</h3>
                     <div class="count"><t t-esc="dashboard_data.resignation_secretary_count or 0"/></div>
-                    <button type="button" class="btn btn-light o_dashboard_open_action" data-action="metro_corporate_docs.corporate_resignation_secretary_action">
-                        View Records
-                    </button>
+                    <div class="metro-dashboard__actions">
+                        <button type="button" class="btn btn-light o_dashboard_open_action" data-action="metro_corporate_docs.corporate_resignation_secretary_action">
+                            View Records
+                        </button>
+                        <button type="button" class="btn btn-light o_dashboard_create_action" data-model="corporate.resignation.secretary">
+                            Create
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
