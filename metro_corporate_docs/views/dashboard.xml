@@ -27,7 +27,7 @@
                         <div class="metro-dashboard__icon"><i class="fa fa-map-marker"/></div>
                         <h3>Address Change</h3>
                         <div class="count"><t t-esc="dashboard_data.address_change_count or 0"/></div>
-                        <button type="button" class="btn btn-light o_dashboard_open_action" data-model="corporate.address.change" data-name="Corporate Address Change">
+                        <button type="button" class="btn btn-light o_dashboard_open_action" data-action="metro_corporate_docs.corporate_address_change_action">
                             View Records
                         </button>
                     </div>
@@ -36,7 +36,7 @@
                         <div class="metro-dashboard__icon"><i class="fa fa-user-plus"/></div>
                         <h3>Appointment Secretary</h3>
                         <div class="count"><t t-esc="dashboard_data.appointment_secretary_count or 0"/></div>
-                        <button type="button" class="btn btn-light o_dashboard_open_action" data-model="corporate.appointment.secretary" data-name="Corporate Appointment Secretary">
+                        <button type="button" class="btn btn-light o_dashboard_open_action" data-action="metro_corporate_docs.corporate_appointment_secretary_action">
                             View Records
                         </button>
                     </div>
@@ -45,7 +45,7 @@
                         <div class="metro-dashboard__icon"><i class="fa fa-user-times"/></div>
                         <h3>Resignation Secretary</h3>
                         <div class="count"><t t-esc="dashboard_data.resignation_secretary_count or 0"/></div>
-                        <button type="button" class="btn btn-light o_dashboard_open_action" data-model="corporate.resignation.secretary" data-name="Corporate Resignation Secretary">
+                        <button type="button" class="btn btn-light o_dashboard_open_action" data-action="metro_corporate_docs.corporate_resignation_secretary_action">
                             View Records
                         </button>
                     </div>
@@ -57,21 +57,6 @@
             <field name="name">Corporate Documents Dashboard</field>
             <field name="tag">metro_corporate_docs.dashboard</field>
             <field name="target">current</field>
-        </record>
-
-        <record id="action_metro_corporate_docs_dashboard_fallback" model="ir.actions.act_window">
-            <field name="name">Corporate Documents Dashboard (Legacy)</field>
-            <field name="res_model">corporate.address.change</field>
-            <field name="view_mode">tree,form</field>
-            <field name="target">current</field>
-        </record>
-
-        <record id="menu_corporate_documents_dashboard_fallback" model="ir.ui.menu">
-            <field name="name">Dashboard</field>
-            <field name="parent_id" ref="metro_corporate_docs.menu_corporate_documents_root"/>
-            <field name="action" eval="'ir.actions.act_window,%d' % ref('metro_corporate_docs.action_metro_corporate_docs_dashboard_fallback')"/>
-            <field name="sequence">1</field>
-            <field name="active" eval="False"/>
         </record>
 
     </data>
