@@ -74,7 +74,6 @@ odoo.define('metro_corporate_docs.dashboard', function (require) {
         },
 
         _onOpenSettings: function (event) {
-            var self = this;
             var model = $(event.currentTarget).data('model');
             if (!model) {
                 return;
@@ -82,24 +81,13 @@ odoo.define('metro_corporate_docs.dashboard', function (require) {
 
             var context = this._getDefaultContext();
 
-            return rpc.query({
-                model: model,
-                method: 'search_read',
-                args: [[], ['id']],
-                kwargs: {limit: 1, order: 'id desc'},
-            }).then(function (records) {
-                var action = {
-                    type: 'ir.actions.act_window',
-                    res_model: model,
-                    name: 'Settings',
-                    views: [[false, 'form']],
-                    target: 'current',
-                    context: context,
-                };
-                if (records && records.length) {
-                    action.res_id = records[0].id;
-                }
-                self.do_action(action);
+            this.do_action({
+                type: 'ir.actions.act_window',
+                res_model: model,
+                name: 'Settings',
+                views: [[false, 'form']],
+                target: 'current',
+                context: context,
             });
         },
 
