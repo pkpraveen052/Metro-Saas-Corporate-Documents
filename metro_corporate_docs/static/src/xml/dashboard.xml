@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="MetroCorporateDocsDashboard">
+        <div class="metro-dashboard">
+            <div class="metro-dashboard__hero">
+                <div>
+                    <h1>Corporate Documents Dashboard</h1>
+                    <p>Open forms quickly and monitor records with one click.</p>
+                </div>
+                <div class="metro-dashboard__badge">
+                    <i class="fa fa-line-chart"/>
+                    <span>Live overview</span>
+                </div>
+            </div>
+
+            <div class="metro-dashboard__cards">
+                <div class="metro-dashboard__card metro-dashboard__card--address">
+                    <div class="metro-dashboard__icon"><i class="fa fa-map-marker"/></div>
+                    <h3>Address Change</h3>
+                    <div class="count"><t t-esc="dashboard_data.address_change_count or 0"/></div>
+                    <button type="button" class="btn btn-light o_dashboard_open_action" data-action="metro_corporate_docs.corporate_address_change_action">
+                        View Records
+                    </button>
+                </div>
+
+                <div class="metro-dashboard__card metro-dashboard__card--appointment">
+                    <div class="metro-dashboard__icon"><i class="fa fa-user-plus"/></div>
+                    <h3>Appointment Secretary</h3>
+                    <div class="count"><t t-esc="dashboard_data.appointment_secretary_count or 0"/></div>
+                    <button type="button" class="btn btn-light o_dashboard_open_action" data-action="metro_corporate_docs.corporate_appointment_secretary_action">
+                        View Records
+                    </button>
+                </div>
+
+                <div class="metro-dashboard__card metro-dashboard__card--resignation">
+                    <div class="metro-dashboard__icon"><i class="fa fa-user-times"/></div>
+                    <h3>Resignation Secretary</h3>
+                    <div class="count"><t t-esc="dashboard_data.resignation_secretary_count or 0"/></div>
+                    <button type="button" class="btn btn-light o_dashboard_open_action" data-action="metro_corporate_docs.corporate_resignation_secretary_action">
+                        View Records
+                    </button>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>

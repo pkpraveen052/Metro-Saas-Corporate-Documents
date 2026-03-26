@@ -25,7 +25,9 @@
         'views/corporate_appointment_secretary.xml',
         'views/corporate_resignation_secretary.xml',
     ],
-    "qweb": [],
+    "qweb": [
+        "static/src/xml/dashboard.xml",
+    ],
     'installable': True,
     'application': True,
     'auto_install': False,
